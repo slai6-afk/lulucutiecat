@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lulu the Cat</title>
+  <meta name="description" content="Static HTML/CSS site for Lulu—basic info, gallery, and growth timeline." />
+  <style>
+    :root{ --white:#ffffff; --pink:#ff80a6; --pink-200:#ffd3df; --black:#111111; --gray:#6b7280; }
+    html { box-sizing: border-box; }
+    *,*::before,*::after{ box-sizing: inherit; }
+    body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans"; color: var(--black); background: var(--white); line-height: 1.6; }
+
+    .container { width: min(1100px, 92vw); margin-inline: auto; }
+    .section { padding: 72px 0; }
+
+    /* Title banner (non-sticky) */
+    .banner { padding: 24px 0; border-bottom: 1px solid #eee; }
+    .title { display:flex; align-items:center; gap:.6rem; font-weight: 800; letter-spacing:.2px; }
+    .mark { width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, var(--pink) 0 55%, var(--pink-200) 56% 100%); border: 1px solid #d38aa1; box-shadow: 0 1px 0 var(--white) inset; }
+
+    /* Hero */
+    .hero { display:grid; grid-template-columns: 1.2fr 1fr; gap:2rem; align-items:center; padding: 40px 0 8px; }
+    .hero h1 { font-size: clamp(2.1rem, 4vw, 3.2rem); line-height: 1.1; margin: 0 0 .6rem; }
+    .subtitle { color: var(--gray); margin: 0; }
+    .hero-card { border: 2px solid var(--black); border-radius: 18px; padding: .6rem; background: var(--white); }
+    .hero-media { aspect-ratio: 4/3; width:100%; object-fit: cover; border-radius: 14px; border: 2px dashed var(--pink); background: repeating-linear-gradient(45deg,#fff0f5 0 12px,#ffe6ee 12px 24px); display:grid; place-items:center; color: var(--gray); font-weight:600; }
+
+    /* Section titles */
+    .eyebrow { text-transform: uppercase; letter-spacing:.12em; font-size:.8rem; color: var(--gray); margin:0 0 .2rem; }
+    .h2 { font-size: clamp(1.6rem, 2.8vw, 2.2rem); margin:.3rem 0 1rem; }
+    .accent { color: var(--pink); }
+
+    /* Info Table */
+    .info { border: 2px solid var(--black); border-radius: 18px; overflow: hidden; background: var(--white); }
+    table { width:100%; border-collapse: collapse; }
+    thead th { text-align:left; background: color-mix(in sRGB, var(--pink) 12%, var(--white)); padding: 14px 16px; font-size:.9rem; border-bottom:1px solid var(--black); }
+    tbody td { padding: 14px 16px; border-bottom: 1px solid #e5e7eb; }
+    tbody tr:nth-child(odd) td { background: #fdf6f9; }
+    tbody tr:last-child td { border-bottom:none; }
+
+    /* Gallery */
+    .gallery-grid { display:grid; grid-template-columns: repeat(12, 1fr); gap:12px; }
+    .gallery-grid figure { margin:0; grid-column: span 4; border-radius:14px; overflow:hidden; border:1.5px solid #d38aa1; background:#fff; }
+    .gallery-grid img { width:100%; height:100%; object-fit: cover; display:block; aspect-ratio:1/1; }
+    .gallery-grid figcaption { padding:8px 10px; font-size:.86rem; color: var(--gray); }
+    .gallery-grid figure.wide { grid-column: span 8; }
+    .gallery-grid figure.tall img { aspect-ratio: 3/4; }
+
+    /* Timeline */
+    .timeline { position: relative; margin-left: 8px; }
+    .timeline::before { content:""; position:absolute; left:14px; top:0; bottom:0; width:2px; background: color-mix(in sRGB, var(--pink) 40%, var(--black) 10%); }
+    .event { position: relative; margin-left:0; padding: 0 0 22px 44px; }
+    .event:last-child { padding-bottom:0; }
+    .event::before { content:""; position:absolute; left:8px; top:2px; width:14px; height:14px; border-radius:50%; background: var(--pink); border:2px solid var(--black); box-shadow: 0 0 0 4px #ffe6ee; }
+    .event time { display:inline-block; font-weight:800; background: var(--black); color: var(--white); padding:.2rem .5rem; border-radius:999px; margin-bottom:.4rem; }
+    .event h3 { margin:.3rem 0 .2rem; font-size:1.05rem; }
+    .event p { margin:0; color: var(--gray); }
+
+    /* Footer */
+    footer { border-top:1px solid #eee; padding: 36px 0; color: var(--gray); text-align:center; }
+
+    /* Responsive */
+    @media (max-width: 880px){
+      .hero { grid-template-columns: 1fr; }
+      .gallery-grid figure { grid-column: span 6; }
+      .gallery-grid figure.wide { grid-column: span 12; }
+    }
+    @media (max-width: 520px){
+      .gallery-grid { gap:8px; }
+      .gallery-grid figure { grid-column: span 12; }
+    }
+
+    @media print{
+      .section { padding: 12px 0; }
+      body { color:#000; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Title banner (static, no links) -->
+  <div class="banner">
+    <div class="container title">
+      <span class="mark" aria-hidden="true"></span>
+      <span>Lulu the Cat</span>
+    </div>
+  </div>
+
+  <!-- Intro -->
+  <section class="container hero" aria-labelledby="intro-title">
+    <div>
+      <p class="eyebrow">Meet Lulu</p>
+      <h1 id="intro-title">A tiny website for a huge personality<span class="accent">.</span></h1>
+      <p class="subtitle">Theme colors: <strong>white</strong>, <strong>pink</strong>, and <strong>black</strong>. Pure static HTML &amp; CSS (no scripts, no interactive navigation).</p>
+    </div>
+    <div class="hero-card">
+      <div class="hero-media" role="img" aria-label="Placeholder for Lulu's hero photo">
+        Add Lulu's photo here (4:3)
+      </div>
+    </div>
+  </section>
+
+  <!-- Basic Information -->
+  <section class="section" aria-labelledby="about-title">
+    <div class="container">
+      <p class="eyebrow">Basics</p>
+      <h2 id="about-title" class="h2">Basic Information<span class="accent">.</span></h2>
+      <div class="info" role="region" aria-label="Basic Information table">
+        <table>
+          <thead>
+            <tr><th scope="col">Field</th><th scope="col">Details</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Name</td><td>Lulu</td></tr>
+            <tr><td>Breed</td><td>— e.g., British Shorthair</td></tr>
+            <tr><td>Birthday</td><td>— e.g., 2023-05-18</td></tr>
+            <tr><td>Adoption Day</td><td>— e.g., 2023-08-02</td></tr>
+            <tr><td>Favorite Snacks</td><td>Chicken treats, tuna flakes</td></tr>
+            <tr><td>Personality</td><td>Cuddly, staircase sprinter, window watcher</td></tr>
+            <tr><td>Quirks</td><td>Head-bonks plants, chirps at pigeons</td></tr>
+            <tr><td>Weight</td><td>— e.g., 3.6 kg (Oct 2025)</td></tr>
+            <tr><td>Vet</td><td>— e.g., Brooklyn Paws Clinic</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="section" aria-labelledby="gallery-title">
+    <div class="container">
+      <p class="eyebrow">Photos</p>
+      <h2 id="gallery-title" class="h2">Gallery<span class="accent">.</span></h2>
+      <p class="subtitle">Replace image <code>src</code> paths with your files in an <code>images/</code> folder.</p>
+      <div class="gallery-grid" role="list">
+        <figure role="listitem" class="wide">
+          <img src="images/lulu-01.jpg" alt="Lulu lounging in a sunbeam on the couch.">
+          <figcaption>Golden hour queen.</figcaption>
+        </figure>
+        <figure role="listitem" class="tall">
+          <img src="images/lulu-02.jpg" alt="Close-up of Lulu peeking from a paper bag.">
+          <figcaption>Inspector Bag.</figcaption>
+        </figure>
+        <figure role="listitem">
+          <img src="images/lulu-03.jpg" alt="Lulu stretching with paws up.">
+          <figcaption>Big stretch energy.</figcaption>
+        </figure>
+        <figure role="listitem">
+          <img src="images/lulu-04.jpg" alt="Lulu wearing a pink bow collar.">
+          <figcaption>Pink bow, perfect vibe.</figcaption>
+        </figure>
+        <figure role="listitem" class="wide">
+          <img src="images/lulu-05.jpg" alt="Lulu watching birds from the window.">
+          <figcaption>Pigeon TV.</figcaption>
+        </figure>
+        <figure role="listitem">
+          <img src="images/lulu-06.jpg" alt="Lulu curled up like a cinnamon roll.">
+          <figcaption>Cinna-roll mode.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Growth Timeline -->
+  <section class="section" aria-labelledby="timeline-title">
+    <div class="container">
+      <p class="eyebrow">Milestones</p>
+      <h2 id="timeline-title" class="h2">Growth Timeline<span class="accent">.</span></h2>
+      <div class="timeline" aria-label="Lulu growth timeline">
+        <article class="event">
+          <time datetime="2023-05-18">May 18, 2023</time>
+          <h3>Born</h3>
+          <p>Tiny paws. Big destiny.</p>
+        </article>
+        <article class="event">
+          <time datetime="2023-08-02">Aug 2, 2023</time>
+          <h3>Gotcha Day</h3>
+          <p>First cuddle at home; claimed the window seat.</p>
+        </article>
+        <article class="event">
+          <time datetime="2023-10-14">Oct 14, 2023</time>
+          <h3>First Vet Visit</h3>
+          <p>Healthy checkup; discovered the power of treats.</p>
+        </article>
+        <article class="event">
+          <time datetime="2024-04-01">Apr 1, 2024</time>
+          <h3>Stair Sprint Champion</h3>
+          <p>House record: floor to sofa in 4 seconds.</p>
+        </article>
+        <article class="event">
+          <time datetime="2025-09-12">Sep 12, 2025</time>
+          <h3>Bird-Watching Pro</h3>
+          <p>Perfected the chirp at Brooklyn pigeons.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">Made with ❤ for Lulu · © 2025</div>
+  </footer>
+</body>
+</html>
