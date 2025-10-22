@@ -19,8 +19,6 @@ h1, h2 { margin: 14px 0 8px; }
 .note { color: var(--gray); font-size: 0.95rem; }
 img { max-width: 100%; height: auto; display: block; }
   .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  @media (max-width: 800px){ .gallery { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 520px){ .gallery { grid-template-columns: 1fr; } }
 table { width: 100%; border-collapse: collapse; border: 1px solid #ddd; }
 th, td { padding: 10px; border-top: 1px solid #eee; text-align: left; }
 thead th { background: #ffe6ee; }
